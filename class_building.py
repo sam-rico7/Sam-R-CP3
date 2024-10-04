@@ -10,25 +10,48 @@ class Movie:
     def __str__(self):
         return f"Name: {self.name}\nYear: {self.year}\nDirector: {self.director}\nRating: {self.rating}\nGenre: {self.genre}\nCast: {', '.join(self.cast)}"
 
-    @staticmethod
-    def sort_movies_alphabetically(movies):
-        return sorted(movies, key=lambda movie: movie.name)
+def sort_movies_alphabetically(movies):
+    sorted_movies = []
+    while movies:
+        min_movie = movies[0]
+        for movie in movies:
+            if movie.name < min_movie.name:
+                min_movie = movie
+        sorted_movies.append(min_movie)
+        movies.remove(min_movie)
+    return sorted_movies
 
-    @staticmethod
-    def sort_movies_chronologically(movies):
-        return sorted(movies, key=lambda movie: movie.year)
+def sort_movies_chronologically(movies):
+    sorted_movies = []
+    while movies:
+        min_movie = movies[0]
+        for movie in movies:
+            if movie.year < min_movie.year:
+                min_movie = movie
+        sorted_movies.append(min_movie)
+        movies.remove(min_movie)
+    return sorted_movies
 
-    @staticmethod
-    def search_by_genre(movies, genre):
-        return [movie for movie in movies if movie.genre.lower() == genre.lower()]
+def search_by_genre(movies, genre):
+    found_movies = []
+    for movie in movies:
+        if movie.genre.lower() == genre.lower():
+            found_movies.append(movie)
+    return found_movies
 
-    @staticmethod
-    def search_by_director(movies, director):
-        return [movie for movie in movies if movie.director.lower() == director.lower()]
+def search_by_director(movies, director):
+    found_movies = []
+    for movie in movies:
+        if movie.director.lower() == director.lower():
+            found_movies.append(movie)
+    return found_movies
 
-    @staticmethod
-    def search_by_cast(movies, actor):
-        return [movie for movie in movies if actor in map(str.lower, movie.cast)]
+def search_by_cast(movies, actor):
+    found_movies = []
+    for movie in movies:
+        if actor.lower() in [member.lower() for member in movie.cast]:
+            found_movies.append(movie)
+    return found_movies
 
 def display_menu():
     print("\n=== Movie Management Menu ===")
@@ -82,26 +105,31 @@ while True:
 
     if choice == '1':
         print("\nMovies sorted alphabetically:")
-        for movie in Movie.sort_movies_alphabetically(movies):
+        sorted_movies = sort_movies_alphabetically(movies.copy())
+        for movie in sorted_movies:
             print(movie)
     elif choice == '2':
         print("\nMovies sorted chronologically:")
-        for movie in Movie.sort_movies_chronologically(movies):
+        sorted_movies = sort_movies_chronologically(movies.copy())
+        for movie in sorted_movies:
             print(movie)
     elif choice == '3':
         genre = input("Enter the genre to search for: ")
         print(f"\nMovies in the '{genre}' genre:")
-        for movie in Movie.search_by_genre(movies, genre):
+        found_movies = search_by_genre(movies, genre)
+        for movie in found_movies:
             print(movie)
     elif choice == '4':
         director = input("Enter the director's name to search for: ")
         print(f"\nMovies directed by '{director}':")
-        for movie in Movie.search_by_director(movies, director):
+        found_movies = search_by_director(movies, director)
+        for movie in found_movies:
             print(movie)
     elif choice == '5':
         actor = input("Enter the actor's name to search for: ")
         print(f"\nMovies with '{actor}' in the cast:")
-        for movie in Movie.search_by_cast(movies, actor):
+        found_movies = search_by_cast(movies, actor)
+        for movie in found_movies:
             print(movie)
     elif choice == '6':
         print("Exiting the program.")
