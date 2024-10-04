@@ -10,7 +10,7 @@ class Movie:
     def __str__(self):
         return f"Name: {self.name}\nYear: {self.year}\nDirector: {self.director}\nRating: {self.rating}\nGenre: {self.genre}\nCast: {', '.join(self.cast)}"
 
-def sort_movies_alphabetically(movies):
+def sort_movies_alpha(movies):
     sorted_movies = []
     while movies:
         min_movie = movies[0]
@@ -105,7 +105,7 @@ while True:
 
     if choice == '1':
         print("\nMovies sorted alphabetically:")
-        sorted_movies = sort_movies_alphabetically(movies.copy())
+        sorted_movies = sort_movies_alpha(movies.copy())
         for movie in sorted_movies:
             print(movie)
     elif choice == '2':
