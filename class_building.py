@@ -21,7 +21,7 @@ def sort_movies_alpha(movies):
         movies.remove(min_movie)
     return sorted_movies
 
-def sort_movies_chronologically(movies):
+def sort_movies_chrono(movies):
     sorted_movies = []
     while movies:
         min_movie = movies[0]
@@ -110,7 +110,7 @@ while True:
             print(movie)
     elif choice == '2':
         print("\nMovies sorted chronologically:")
-        sorted_movies = sort_movies_chronologically(movies.copy())
+        sorted_movies = sort_movies_chrono(movies.copy())
         for movie in sorted_movies:
             print(movie)
     elif choice == '3':
