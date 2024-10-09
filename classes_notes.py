@@ -29,7 +29,7 @@ class Animal:
     
 
 
-#We geneerally store object in variables (individually or in a list) so we can use it.
+#We generally store object in variables (individually or in a list) so we can use it.
 cat = Animal("Tom", "Cat", 21, "Male", "Common")
 frog = Animal("Jarrod", "Poison Dart Frog", 500, "Female", "Rare")
 
