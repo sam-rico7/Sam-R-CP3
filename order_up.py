@@ -63,7 +63,7 @@ class Dinner:
                     print("Perfect!")
                     yesdrinkchoice = input("What drink would you like? Please type the entire name: ")
                     yesdrinkchoice1 = yesdrinkchoice.capitalize()
-                    if yesdrinkchoice1 in menu.values():
+                    if yesdrinkchoice1 in menu_values():
                         print("Got it!")   
                     else:
                         print("This drink is not in our menu, please try again.")
@@ -75,7 +75,7 @@ class Dinner:
                     print("Perfect!")
                     yesappetizer = input("What drink would you like? Please type the entire name: ")
                     yesappetizer1 = yesappetizer.capitalize()
-                    if yesappetizer1 in menu.values():
+                    if yesappetizer1 in menu_values():
                         print("Got it!")   
                     else:
                         print("This appetizer is not in our menu, please try again.")
@@ -87,7 +87,7 @@ class Dinner:
                     print("Perfect!")
                     yesmaincourse = input("What Main Course would you like? Please type the entire name: ")
                     yesmaincourse1 = yesmaincourse.capitalize()
-                    if yesmaincourse1 in menu.values():
+                    if yesmaincourse1 in menu_values():
                         print("Got it!")   
                     else:
                         print("This Main Course is not in our menu, please try again.")
@@ -102,7 +102,7 @@ class Dinner:
                     print("Perfect!")
                     yesdessertchoice = input("What drink would you like? Please type the entire name: ")
                     yesdessertchoice1 = yesdessertchoice.capitalize()
-                    if yesdessertchoice1 in menu.values():
+                    if yesdessertchoice1 in menu_values():
                         print("Got it!")   
                     else:
                         print("This drink is not in our menu, please try again.")
@@ -121,6 +121,7 @@ menu = {
     "Desserts": ["Leche Asada", "Brevas con Arequipe", "Dulce de Mora", "Brownie con Helado", "Duraznos con Arequipe"]
 }
 
+menu_values = menu.values()
 dinner1 = Dinner()
 dinner1.run(menu)
 
