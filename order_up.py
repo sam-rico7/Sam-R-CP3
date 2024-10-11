@@ -23,7 +23,6 @@
 
 
 class Dinner:
-
     def __init__(self, drink="", appetizer="", main="", side1="", side2="", dessert=""):
         self.drink = drink
         self.appetizer = appetizer
@@ -50,68 +49,47 @@ class Dinner:
         print("6. Exit")
         print("==============================")
 
+    def get_choice(self, category, menu):
+        print(f"\n{category}:")
+        print(", ".join(menu[category]))
+        choice = input(f"Would you like to order any of the {category.lower()}?\n(1) Yes  (2) No:  ")
+        if choice == '1':
+            print("Perfect!")
+            item = input(f"What {category.lower()[:-1]} would you like? Please type the entire name: ").title()
+            if item in menu[category]:
+                print("Got it!")
+                return item
+            else:
+                print(f"This {category.lower()[:-1]} is not in our menu, please try again.")
+        return ""
+
     def run(self, menu):
         while True:
             self.display_menu()
             choice = input("Please select what category you want to see (1-6): ")
 
             if choice == '1':
-                print("\nDrinks:")
-                print(", ".join(menu["Drinks"]))
-                drinkchoice = input("Would you like to order any of the drinks?\n(1) Yes  (2) No:  ")
-                if drinkchoice == '1':
-                    print("Perfect!")
-                    yesdrinkchoice = input("What drink would you like? Please type the entire name: ")
-                    yesdrinkchoice1 = yesdrinkchoice.capitalize()
-                    if yesdrinkchoice1 in menu_values():
-                        print("Got it!")   
-                    else:
-                        print("This drink is not in our menu, please try again.")
+                self.drink = self.get_choice("Drinks", menu)
             elif choice == '2':
-                print("\nAppetizers:")
-                print(", ".join(menu["Appetizers"]))
-                appetizerchoice = input("Would you like to order any of the appetizers?\n(1) Yes  (2) No:  ")
-                if appetizerchoice == '1':
-                    print("Perfect!")
-                    yesappetizer = input("What drink would you like? Please type the entire name: ")
-                    yesappetizer1 = yesappetizer.capitalize()
-                    if yesappetizer1 in menu_values():
-                        print("Got it!")   
-                    else:
-                        print("This appetizer is not in our menu, please try again.")
+                self.appetizer = self.get_choice("Appetizers", menu)
             elif choice == '3':
-                print("\nMain Courses:")
-                print(", ".join(menu["Main Courses"]))
-                maincourse = input("Would you like to order any of the Main Courses?\n(1) Yes  (2) No:  ")
-                if maincourse == '1':
-                    print("Perfect!")
-                    yesmaincourse = input("What Main Course would you like? Please type the entire name: ")
-                    yesmaincourse1 = yesmaincourse.capitalize()
-                    if yesmaincourse1 in menu_values():
-                        print("Got it!")   
-                    else:
-                        print("This Main Course is not in our menu, please try again.")
+                self.main = self.get_choice("Main Courses", menu)
             elif choice == '4':
                 print("\nSides:")
                 print(", ".join(menu["Sides"]))
+                self.side1 = self.get_choice("Sides", menu)
+                if self.side1:
+                    self.side2 = self.get_choice("Sides", menu)
             elif choice == '5':
-                print("\nDesserts:")
-                print(", ".join(menu["Desserts"]))
-                dessertchoice = input("Would you like to order any of the drinks?\n(1) Yes  (2) No:  ")
-                if dessertchoice == '1':
-                    print("Perfect!")
-                    yesdessertchoice = input("What drink would you like? Please type the entire name: ")
-                    yesdessertchoice1 = yesdessertchoice.capitalize()
-                    if yesdessertchoice1 in menu_values():
-                        print("Got it!")   
-                    else:
-                        print("This drink is not in our menu, please try again.")
+                self.dessert = self.get_choice("Desserts", menu)
             elif choice == '6':
                 print("\nExiting the program.")
                 break
             else:
                 print("\nInvalid choice. Please try again.")
 
+        print("\nYour dinner order:")
+        print(self)
 
 menu = {
     "Drinks": ["Water", "Lemonade", "Manzana Postobon", "Colombiana", "Refajo (Jarra)", "Pony Malta", "Jugo de Lulo", "Jugo de Maracuya"],
@@ -121,33 +99,5 @@ menu = {
     "Desserts": ["Leche Asada", "Brevas con Arequipe", "Dulce de Mora", "Brownie con Helado", "Duraznos con Arequipe"]
 }
 
-menu_values = menu.values()
 dinner1 = Dinner()
 dinner1.run(menu)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
