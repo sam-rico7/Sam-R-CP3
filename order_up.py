@@ -83,7 +83,7 @@ class Dinner:
                 print("\nMain Courses:")
                 print(", ".join(menu["Main Courses"]))
                 maincourse = input("Would you like to order any of the Main Courses?\n(1) Yes  (2) No:  ")
-                if drinkchoice == '1':
+                if maincourse == '1':
                     print("Perfect!")
                     yesmaincourse = input("What Main Course would you like? Please type the entire name: ")
                     yesmaincourse1 = yesmaincourse.capitalize()
