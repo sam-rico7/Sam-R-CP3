@@ -20,9 +20,15 @@
 #Allows user to place their order 
 #Allows user to change an item in their order
 
-
-
 class Dinner:
+    prices = {
+        "Drinks": {"Water": 1.00, "Lemonade": 2.50, "Manzana Postobon": 2.00, "Colombiana": 2.00, "Refajo (Jarra)": 5.00, "Pony Malta": 2.50, "Jugo de Lulo": 3.00, "Jugo de Maracuya": 3.00},
+        "Appetizers": {"Patacones": 4.50, "Chicharron Carnudo": 5.00, "Empanadas": 3.00, "Chorizos": 4.00, "Morcillas": 4.50, "Arepa de Chocolo": 3.50, "Chunchullo": 5.50},
+        "Main Courses": {"Bandeja Paisa": 15.00, "Mondongo": 13.00, "Ajiaco": 12.50, "Bistec a Caballo": 14.00, "Lengua en Salsa Criolla": 16.00, "Menu infantil": 10.00, "Picada Antioqueña": 18.00, "Cazuela de Frijoles": 13.50, "Mazamorra Chiquita": 12.00},
+        "Sides": {"Arroz": 2.00, "Papa Francesa": 2.50, "Patacon": 2.00, "Papa en Cascos": 2.50, "Platano Maduro": 2.50, "Frijoles": 3.00, "Arepa": 1.50},
+        "Desserts": {"Leche Asada": 4.00, "Brevas con Arequipe": 4.50, "Dulce de Mora": 4.00, "Brownie con Helado": 5.00, "Duraznos con Arequipe": 4.50}
+    }
+
     def __init__(self, drink="", appetizer="", main="", side1="", side2="", dessert=""):
         self.drink = drink
         self.appetizer = appetizer
@@ -39,6 +45,23 @@ class Dinner:
                 f"Side 2: {self.side2}\n"
                 f"Dessert: {self.dessert}")
 
+    @staticmethod
+    def calculate_total(drink, appetizer, main, side1, side2, dessert):
+        total = 0
+        if drink in Dinner.prices["Drinks"]:
+            total += Dinner.prices["Drinks"][drink]
+        if appetizer in Dinner.prices["Appetizers"]:
+            total += Dinner.prices["Appetizers"][appetizer]
+        if main in Dinner.prices["Main Courses"]:
+            total += Dinner.prices["Main Courses"][main]
+        if side1 in Dinner.prices["Sides"]:
+            total += Dinner.prices["Sides"][side1]
+        if side2 in Dinner.prices["Sides"]:
+            total += Dinner.prices["Sides"][side2]
+        if dessert in Dinner.prices["Desserts"]:
+            total += Dinner.prices["Desserts"][dessert]
+        return total
+
     def display_menu(self):
         print("\n=== This is our menu of the day! You can choose a drink, an appetizer, a main course, two sides, and a dessert. ===")
         print("1. Drinks")
@@ -46,22 +69,25 @@ class Dinner:
         print("3. Main Courses")
         print("4. Sides")
         print("5. Desserts")
-        print("6. Exit")
+        print("6. Exit and order.")
         print("==============================")
 
     def get_choice(self, category, menu):
-        print(f"\n{category}:")
-        print(", ".join(menu[category]))
-        choice = input(f"Would you like to order any of the {category.lower()}?\n(1) Yes  (2) No:  ")
-        if choice == '1':
-            print("Perfect!")
-            item = input(f"What {category.lower()[:-1]} would you like? Please type the entire name: ").title()
-            if item in menu[category]:
-                print("Got it!")
-                return item
-            else:
-                print(f"This {category.lower()[:-1]} is not in our menu, please try again.")
-        return ""
+        print(f"\n{category} Menu:")
+        for i, item in enumerate(menu[category], 1):
+            print(f"{i}. {item}")
+        
+        while True:
+            try:
+                choice = int(input(f"Please select a {category.lower()[:-1]} by typing its number: "))
+                if 1 <= choice <= len(menu[category]):
+                    selected_item = menu[category][choice - 1]
+                    print(f"Got it! You selected {selected_item}.")
+                    return selected_item
+                else:
+                    print(f"Invalid selection. Please choose a number between 1 and {len(menu[category])}.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
     def run(self, menu):
         while True:
@@ -90,6 +116,10 @@ class Dinner:
 
         print("\nYour dinner order:")
         print(self)
+
+        # Calculate the total cost
+        total_price = Dinner.calculate_total(self.drink, self.appetizer, self.main, self.side1, self.side2, self.dessert)
+        print(f"Total Price: ${total_price:.2f}")
 
 menu = {
     "Drinks": ["Water", "Lemonade", "Manzana Postobon", "Colombiana", "Refajo (Jarra)", "Pony Malta", "Jugo de Lulo", "Jugo de Maracuya"],
