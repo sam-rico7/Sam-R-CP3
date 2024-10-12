@@ -22,8 +22,8 @@
 
 class Dinner:
     prices = {
-        "Drinks": {"Water": 1.00, "Lemonade": 2.50, "Manzana Postobon": 2.00, "Colombiana": 2.00, "Refajo (Jarra)": 5.00, "Pony Malta": 2.50, "Jugo de Lulo": 3.00, "Jugo de Maracuya": 3.00},
-        "Appetizers": {"Patacones": 4.50, "Chicharron Carnudo": 5.00, "Empanadas": 3.00, "Chorizos": 4.00, "Morcillas": 4.50, "Arepa de Chocolo": 3.50, "Chunchullo": 5.50},
+        "Drinks": {"Water": 0.00, "Lemonade": 2.50, "Manzana Postobon": 3.00, "Colombiana": 3.00, "Refajo (Jarra)": 5.00, "Pony Malta": 2.50, "Jugo de Lulo": 3.00, "Jugo de Maracuya": 3.00},
+        "Appetizers": {"Patacones": 4.50, "Chicharron Carnudo": 5.00, "Empanadas": 3.00, "Chorizos": 4.00, "Morcillas": 4.50, "Arepa de Chocolo": 3.50, "Chunchullo": 5.00},
         "Main Courses": {"Bandeja Paisa": 15.00, "Mondongo": 13.00, "Ajiaco": 12.50, "Bistec a Caballo": 14.00, "Lengua en Salsa Criolla": 16.00, "Menu infantil": 10.00, "Picada Antioqueña": 18.00, "Cazuela de Frijoles": 13.50, "Mazamorra Chiquita": 12.00},
         "Sides": {"Arroz": 2.00, "Papa Francesa": 2.50, "Patacon": 2.00, "Papa en Cascos": 2.50, "Platano Maduro": 2.50, "Frijoles": 3.00, "Arepa": 1.50},
         "Desserts": {"Leche Asada": 4.00, "Brevas con Arequipe": 4.50, "Dulce de Mora": 4.00, "Brownie con Helado": 5.00, "Duraznos con Arequipe": 4.50}
