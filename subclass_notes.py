@@ -7,6 +7,8 @@ class Petstore:
         self.featured_pet = None
 
     def add_pet(self, animal):
+        #assert will check if statement is true and stop code if false
+        #isinstance tests whether an object is an instance or subclass of the class mentioned as the class info in the parameters of the function.
         assert isinstance(animal, Animal)
         self.animals.append(animal)
 
