@@ -3,6 +3,7 @@
 class Animal:
     #We start with the constructor (defines all the atttributes of the object being created)
     def __init__(self, name, species, age, gender, rarity):
+
         self.name = name
         self.species = species
         self.age = age
@@ -22,6 +23,10 @@ class Animal:
             self.losses += 1
             other.losses += 1
             return "Tie"
+        
+
+    def get_name(self):
+        return self.name
 
     #Makes a more readable string when printed
     def __str__(self):
@@ -30,7 +35,7 @@ class Animal:
 
 
 #We generally store object in variables (individually or in a list) so we can use it.
-cat = Animal("Tom", "Cat", 21, "Male", "Common")
+cat = Animal("Cat", 21, "Male", "Common")
 frog = Animal("Jarrod", "Poison Dart Frog", 500, "Female", "Rare")
 
 
