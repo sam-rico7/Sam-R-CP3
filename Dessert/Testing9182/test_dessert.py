@@ -1,4 +1,4 @@
-from dessert import Candy, Cookie, IceCream, Sundae
+from Dessert.dessert import Candy, Cookie, IceCream, Sundae
 
 def test_candy():
     candy = Candy("Chocolate", 2.0, 5.99)
