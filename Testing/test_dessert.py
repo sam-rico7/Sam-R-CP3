@@ -1,4 +1,4 @@
-from dessert import Candy, Cookie, IceCream, Sundae
+from dessert import Candy, Cookie, Icecream, Sundae
 
 def test_candy():
     candy = Candy("Chocolate", 2.0, 5.99)
@@ -13,7 +13,7 @@ def test_cookie():
     assert cookie.price_per_dozen == 3.99
 
 def test_ice_cream():
-    ice_cream = IceCream("Vanilla", 3, 1.99)
+    ice_cream = Icecream("Vanilla", 3, 1.99)
     assert ice_cream.name == "Vanilla"
     assert ice_cream.scoop_count == 3
     assert ice_cream.price_per_scoop == 1.99

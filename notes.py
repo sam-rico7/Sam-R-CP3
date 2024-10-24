@@ -3,7 +3,6 @@
 class Animal:
     #We start with the constructor (defines all the atttributes of the object being created)
     def __init__(self, name, species, age, gender, rarity):
-
         self.name = name
         self.species = species
         self.age = age
@@ -35,7 +34,7 @@ class Animal:
 
 
 #We generally store object in variables (individually or in a list) so we can use it.
-cat = Animal("Cat", 21, "Male", "Common")
+cat = Animal("Bob", "Cat", 21, "Male", "Common")
 frog = Animal("Jarrod", "Poison Dart Frog", 500, "Female", "Rare")
 
 
@@ -52,5 +51,4 @@ print(cat.fight(frog))
 print(cat.losses)
 print(frog.losses)
 
-cat = None
-print(cat.name)
+
