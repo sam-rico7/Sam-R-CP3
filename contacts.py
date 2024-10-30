@@ -82,7 +82,7 @@ class Contacts:
             self.view = 'list'
 
 
-# Main Program Execution
+# Main
 if __name__ == "__main__":
     contacts = Contacts()
     contacts.display()
