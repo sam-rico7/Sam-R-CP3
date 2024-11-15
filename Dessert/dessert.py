@@ -76,15 +76,15 @@ def main():
     subtotal = 0
     total_tax = 0
     for item in orderone.order:
-        cost = item.calculate_cost()
-        tax = item.calculate_tax()
+        cost = round(item.calculate_cost(),2)
+        tax = round(item.calculate_tax(),2)
         data.append([item.name, cost, tax])
         subtotal += cost
         total_tax += tax
 
     total_cost = subtotal + total_tax
-    data.append(['Order Subtotals', subtotal, total_tax])
-    data.append(['Order Total', total_cost, ''])
+    data.append(['Order Subtotals', round(subtotal,2), round(total_tax,2)])
+    data.append(['Order Total', round(total_cost,2), ''])
     data.append(['Total items in the order', len(orderone), ''])
 
     import receipt
@@ -93,4 +93,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
