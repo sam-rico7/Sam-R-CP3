@@ -72,20 +72,27 @@ def main():
     orderone.add(Sundae("Vanilla", 3, .69, "Hot Fudge", 1.29))
     orderone.add(Cookie("Oatmeal Raisin", 2, 3.45))
 
-    data = []
-    subtotal = 0
-    total_tax = 0
+    data = [["Name", "Price", "Tax"]]
+    
+    subtotal = 0.0
+    total_tax = 0.0
+    
     for item in orderone.order:
-        cost = round(item.calculate_cost(),2)
-        tax = round(item.calculate_tax(),2)
-        data.append([item.name, cost, tax])
+        cost = item.calculate_cost()
+        tax = item.calculate_tax()
+        
         subtotal += cost
         total_tax += tax
-
+        
+        cost_str = f"${cost:.2f}"
+        tax_str = f"${tax:.2f}"
+        
+        data.append([item.name, cost_str, tax_str])
+    
     total_cost = subtotal + total_tax
-    data.append(['Order Subtotals', round(subtotal,2), round(total_tax,2)])
-    data.append(['Order Total', round(total_cost,2), ''])
-    data.append(['Total items in the order', len(orderone), ''])
+    data.append(['Order Subtotals', f"${subtotal:.2f}", f"${total_tax:.2f}"])
+    data.append(['Order Total', f"${total_cost:.2f}", ''])
+    data.append(['Total items in the order', str(len(orderone)), ''])
 
     import receipt
     receipt.make_receipt(data, 'receipt.pdf')
