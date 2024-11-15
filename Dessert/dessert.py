@@ -1,27 +1,44 @@
-#Class names: DessertItem, Candy, Cookie, IceCream, Sundae
-class DessertItem:
-    def __init__(self, name):
+from abc import ABC, abstractmethod
+
+class DessertItem(ABC):
+    tax_percent: float = 7.25   
+    def __init__(self, name: str):
         self.name = name
+    @abstractmethod
+    def calculate_cost(self) -> float:
+        pass
+    def calculate_tax(self) -> float:
+        return self.calculate_cost() * (self.tax_percent / 100)
     def __str__(self):
         return self.name
+
 
 class Candy(DessertItem):
     def __init__(self, name: str = '', candy_weight: float = 0.0, price_per_pound: float = 0.0):
         super().__init__(name)
         self.candy_weight = candy_weight
         self.price_per_pound = price_per_pound
+    def calculate_cost(self) -> float:
+        return self.candy_weight * self.price_per_pound
+
 
 class Cookie(DessertItem):
     def __init__(self, name: str = '', cookie_quantity: int = 0, price_per_dozen: float = 0.0):
         super().__init__(name)
         self.cookie_quantity = cookie_quantity
         self.price_per_dozen = price_per_dozen
+    def calculate_cost(self) -> float:
+        return (self.cookie_quantity / 12) * self.price_per_dozen
+
 
 class IceCream(DessertItem):
     def __init__(self, name: str = '', scoop_count: int = 0, price_per_scoop: float = 0.0):
         super().__init__(name)
         self.scoop_count = scoop_count
         self.price_per_scoop = price_per_scoop
+    def calculate_cost(self) -> float:
+        return self.scoop_count * self.price_per_scoop
+
 
 class Sundae(IceCream):
     def __init__(self, name: str = '', scoop_count: int = 0, price_per_scoop: float = 0.0, 
@@ -29,15 +46,22 @@ class Sundae(IceCream):
         super().__init__(name, scoop_count, price_per_scoop)
         self.topping_name = topping_name
         self.topping_price = topping_price
+    def calculate_cost(self) -> float:
+        return super().calculate_cost() + self.topping_price
+
 
 class Order:
     def __init__(self):
         self.order = []
-    def add(self, item):
+    def add(self, item: DessertItem):
         self.order.append(item)
     def __len__(self):
-        size = len(self.order)
-        return size
+        return len(self.order)
+    def order_cost(self) -> float:
+        return sum(item.calculate_cost() for item in self.order)
+    def order_tax(self) -> float:
+        return sum(item.calculate_tax() for item in self.order)
+
 
 def main():
     orderone = Order()
@@ -47,9 +71,26 @@ def main():
     orderone.add(IceCream("Pistachio", 2, .79))
     orderone.add(Sundae("Vanilla", 3, .69, "Hot Fudge", 1.29))
     orderone.add(Cookie("Oatmeal Raisin", 2, 3.45))
-    for item in orderone.order:
-        print(item)
-    print(f"Total number of items in order: {len(orderone)}")
 
-main()
+    data = []
+    subtotal = 0
+    total_tax = 0
+    for item in orderone.order:
+        cost = item.calculate_cost()
+        tax = item.calculate_tax()
+        data.append([item.name, cost, tax])
+        subtotal += cost
+        total_tax += tax
+
+    total_cost = subtotal + total_tax
+    data.append(['Order Subtotals', subtotal, total_tax])
+    data.append(['Order Total', total_cost, ''])
+    data.append(['Total items in the order', len(orderone), ''])
+
+    import receipt
+    receipt.make_receipt(data, 'receipt.pdf')
+
+
+if __name__ == "__main__":
+    main()
 
