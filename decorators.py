@@ -17,4 +17,11 @@ def cough(func):
 def awkward():
     print("Can I get a discount?")
 
+
+@cough
+def answer():
+    print("This is a dollar tree. . .")
+
+
 awkward()
+answer()
