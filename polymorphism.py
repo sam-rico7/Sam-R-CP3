@@ -29,3 +29,5 @@ shapes = [Square(4), Circle(4), Rectangle(5,3), Shape(6), Rectangle(8,2)]
 for shape in shapes:
     if isinstance(shape, Shape):
         print(shape.area)
+
+
