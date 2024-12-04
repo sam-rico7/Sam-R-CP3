@@ -1,0 +1,74 @@
+BoxLayout:
+    orientation: 'vertical'
+
+    #Labels display text on your screen. Works as a print statement
+    Label:
+        text: 'Enter your name:'
+
+    TextInput:
+        id: user_input
+        multiline: False
+
+    #Clickable button with customizable appearance and behavior
+    Button:
+        text: 'Greet'
+        #On_press is what happens when you click the button
+        on_press: output_label.text = 'Hello, ' + user_input.text
+
+    Label:
+        id: output_label
+        text: 'Welcome!'
+    
+    CheckBox:
+        id: check_box
+        active: True
+    Label:
+        text: 'Check me'
+
+    Slider:
+        min: 0
+        max: 100
+        value: 50
+
+    Switch:
+        id: Switch
+    
+    Label:
+        text: "Toggle me"
+
+    ProgressBar:
+        max:100
+        value:75
+
+    Image:
+        source: 'https://media.istockphoto.com/id/1225517650/photo/single-big-oak-tree-in-meadow.jpg?s=612x612&w=0&k=20&c=2DOWsqMW1hDOmn7XlF09IAuOToq28EXpsNgZ8wzhURU='
+        allow_stretch: True
+        keep_ratio: True
+
+GridLayout:
+
+    cols:3
+
+    Button:
+        text: '1'
+
+FloatLayout:
+    Button:
+        text: 'top left'
+        size_hint: 0.2, 0.1
+        pos_hint: {'x': 0.4, 'y': 0.45}
+
+ScreenManager:
+    id: screen_manager
+    transition: NoTransition()
+
+
+    Screen:
+        name: 'Home_screen'
+
+        Button:
+            text: 'Go to settings'
+            on_press: screen_manager.current = 'settings_screen'
+
+
+    
